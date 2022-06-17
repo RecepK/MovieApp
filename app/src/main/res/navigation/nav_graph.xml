@@ -25,5 +25,9 @@
             android:defaultValue="@null"
             app:argType="com.recep.movieapp.model.api.Result"
             app:nullable="true" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            app:nullable="false" />
     </fragment>
 </navigation>

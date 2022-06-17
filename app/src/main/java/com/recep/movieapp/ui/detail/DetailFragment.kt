@@ -19,13 +19,20 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
         }
     }
 
+    private val itemId: Int? by lazy {
+        arguments?.let {
+            DetailFragmentArgs.fromBundle(it).id
+        }
+    }
+
     private val viewModel: DetailViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = DetailFragmentBinding.bind(view)
 
-        item?.let { viewModel.getMovieDetail(it.id) }
+        val id = item?.let { it.id } ?: run { itemId }
+        id?.let { viewModel.getMovieDetail(it) }
 
         viewModel.movieDetailResponse.observe(viewLifecycleOwner, Observer {
             it?.let { binding.item = it }
